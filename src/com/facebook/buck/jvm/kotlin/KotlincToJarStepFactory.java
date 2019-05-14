@@ -235,9 +235,9 @@ public class KotlincToJarStepFactory extends CompileToJarStepFactory implements 
 
             // Generated classes should be part of the output. This way generated files
     // such as META-INF dirs will also be added to the final jar.
-        steps.add(
+    /*    steps.add(
             CopyStep.forDirectory(
-                projectFilesystem, classesOutput, outputDirectory, DirectoryMode.CONTENTS_ONLY));
+                projectFilesystem, classesOutput, outputDirectory, DirectoryMode.CONTENTS_ONLY));*/
     }
 
     final JavacOptions finalJavacOptions;
