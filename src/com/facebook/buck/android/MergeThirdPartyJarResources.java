@@ -102,7 +102,6 @@ public class MergeThirdPartyJarResources extends ModernBuildRule<MergeThirdParty
                 // https://android.googlesource.com/platform/sdk/+/jb-release/sdkmanager/libs/sdklib/src/com/android/sdklib/build/ApkBuilder.java
                 if (name.startsWith(".")
                     || name.endsWith("~")
-                    || name.startsWith("META-INF")
                     || "aidl".equalsIgnoreCase(ext)
                     || "rs".equalsIgnoreCase(ext)
                     || "rsh".equalsIgnoreCase(ext)
