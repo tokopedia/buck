@@ -90,18 +90,21 @@ public class MergeThirdPartyJarResources extends ModernBuildRule<MergeThirdParty
           for (Path jar : thirdPartyJars) {
             try (ZipFile base = new ZipFile(jar.toFile())) {
               for (ZipEntry inputEntry : Collections.list(base.entries())) {
-                if (inputEntry.isDirectory()) {
+                /*if (inputEntry.isDirectory()) {
                   continue;
-                }
+                }*/
                 String name = inputEntry.getName();
                 String ext = Files.getFileExtension(name);
                 String filename = Paths.get(name).getFileName().toString();
+                System.out.println("aku keren hahahahahha");
+                System.out.println(ext);
                 // Android's ApkBuilder filters out a lot of files from Java resources. Try to
                 // match its behavior.
                 // See
                 // https://android.googlesource.com/platform/sdk/+/jb-release/sdkmanager/libs/sdklib/src/com/android/sdklib/build/ApkBuilder.java
-                if (name.startsWith(".")
+                /*if (name.startsWith(".")
                     || name.endsWith("~")
+                    || name.startsWith("META-INF")
                     || "aidl".equalsIgnoreCase(ext)
                     || "rs".equalsIgnoreCase(ext)
                     || "rsh".equalsIgnoreCase(ext)
@@ -116,7 +119,7 @@ public class MergeThirdPartyJarResources extends ModernBuildRule<MergeThirdParty
                     || "package.html".equalsIgnoreCase(filename)
                     || "overview.html".equalsIgnoreCase(filename)) {
                   continue;
-                }
+                }*/
                 try (InputStream inputStream = base.getInputStream(inputEntry)) {
                   builder.addEntry(
                       inputStream,

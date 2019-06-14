@@ -40,6 +40,7 @@ import java.security.UnrecoverableKeyException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Supplier;
+import com.facebook.buck.core.util.log.Logger;
 
 /**
  * Merges resources into a final APK. This code is based off of the now deprecated apkbuilder tool:
@@ -59,6 +60,7 @@ public class ApkBuilderStep implements Step {
   private final ImmutableList<String> javaRuntimeLauncher;
   private final int apkCompressionLevel;
   private final AppBuilderBase appBuilderBase;
+  private static final Logger LOG = Logger.get(ApkBuilderStep.class);
 
   /**
    * @param resourceApk Path to the Apk which only contains resources, no dex files.
@@ -103,6 +105,7 @@ public class ApkBuilderStep implements Step {
   public StepExecutionResult execute(ExecutionContext context)
       throws IOException, InterruptedException {
     PrintStream output = null;
+    LOG.debug("aku kambing.");
     if (context.getVerbosity().shouldUseVerbosityFlagIfAvailable()) {
       output = context.getStdOut();
     }
@@ -137,6 +140,9 @@ public class ApkBuilderStep implements Step {
         Path jarFile = filesystem.getPathForRelativePath(jarFileThatMayContainResources);
         builder.addResourcesFromJar(jarFile.toFile());
       }
+
+      LOG.debug(assetDirectories.toString());
+      LOG.debug(jarFilesThatMayContainResources.toString());
 
       // Build the APK
       builder.sealApk();
